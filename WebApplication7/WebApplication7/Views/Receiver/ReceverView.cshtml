@@ -1,0 +1,188 @@
+﻿<!--RECIEVER INDEX-->
+@using db_connectivity.Models;
+@model List<string>
+<!DOCTYPE HTML>
+<html>
+<head>
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+    <link href="~/styles/StyleSheetHome.css" rel="stylesheet" />
+
+
+    <script>
+        sessionStorage.setItem("name", @Model[1]);
+        @*window.onbeforeunload = function () {
+            var someVarName = @Model[1];
+            localStorage.setItem("name", someVarName);
+            localStorage.setItem("name", $('@Model[1]').val());
+            localStorage.setItem("phone", $('@Model[2]').val());
+            localStorage.setItem("address", $('@Model[3]').val());
+
+        }*@
+        window.onload = function () {
+
+            var name = localStorage.getItem("name");
+            if (name !== null)
+                @Model[1]=name.toString();
+             name = localStorage.getItem("cnic");
+             if (name !== null) $('@Model[0]').val("cnic");
+             name = localStorage.getItem("phone");
+             if (name !== null) $('@Model[2]').val("phone");
+             name = localStorage.getItem("address");
+            if (name !== null) $('@Model[3]').val("address");
+
+            // ...
+        }
+    </script>
+
+</head>
+
+
+<body id="myPage" data-spy="scroll" style="text-align:center" data-target=".navbar" data-offset="60">
+
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#myPage">Blood For Life</a>
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#about"></a></li>
+                    <li onclick="rsearchdiv()"><a href="#rsearch">SEARCH</a></li>
+                    <li onclick="gotorloginprofile()"><a href="#rprofile">MY PROFILE</a></li>
+                    <li onclick="gotochangepwd()"><a href="#rchangepwd">Change Password</a></li>
+                    <li><a  href="../../Receiver/Logout"  >LOG OUT</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+
+
+
+    <div class="text-center">
+        <form style="display:inline">
+            <h4 style="display:inline">Welcome </h4>
+            <h3 id="receivernameheadline" style="display:inline">@Model[1]</h3>
+        </form>
+    </div>
+
+
+    <!--Search Bar Area for Reciever-->
+    <div class="jumbotron1 text-center" id="div_rsearchblock">
+        <h1>In Search Of Blood???</h1>
+
+
+
+        <form>
+            <div class="input-group" style="display:inline-block">
+                <input list="bloodtypes" class="form-control" size="50" placeholder="Blood Type" style="margin:0.3%" required>
+                <datalist id="bloodtypes">
+                    <option value="A+">
+                    <option value="A-">
+                    <option value="B+">
+                    <option value="A-">
+                    <option value="AB+">
+                    <option value="AB-">
+                    <option value="O+">
+                    <option value="O-">
+                </datalist>
+                <input type="text" class="form-control" size="50" placeholder="City" value="Lahore" style="margin:0.3%" required>
+                <input type="text" class="form-control" size="50" placeholder="Block" style="margin:0.3%" required>
+                <div class="input-group-btn">
+                    <button type="button" class="btn btn-danger">SEARCH</button>
+                </div>
+            </div>
+        </form>
+
+    </div>
+
+
+    <!--RECEIVER DATA-->
+    <div>
+        <div class="text-left" id="div_rlogin_data" style="display:none">
+            <form>
+                CNIC: <input id="rlogin_cnic" class="form-control" placeholder="@Model[0]" style="margin:5px" readonly />
+
+                NAME: <input id="rlogin_name" class="form-control" placeholder="@Model[1]" style="margin:5px" />
+
+                PHONE NO: <input id="rlogin_phoneno" class="form-control" placeholder="@Model[2]" style="margin:5px" />
+
+                ADDRESS: <input id="rlogin_address" class="form-control" placeholder="@Model[3]" style="margin:5px" />
+
+                <br />
+                <input type="button" id="rlogin_update" style="border-color:darkred;border-width:2px;box-shadow:2px" value="UPDATE" class="form-control" />
+
+            </form>
+        </div>
+    </div>
+
+    <!--PASSWORD CHANGE DIV-->
+    <div id="div_rlogin_changepwd" style="display:none">
+        <form>
+            <input id="rlogin_oldpwd" class="form-control" type="password" placeholder="OLD PASSWORD" style="margin:15px" required />
+            <input id="rlogin_newpwd" class="form-control" type="password" placeholder="NEW PASSWORD" style="margin:15px" required />
+            <input id="rlogin_newpwdconfirm" class="form-control" type="password" placeholder="RE-ENTER NEW PASSWORD" style="margin:15px" required />
+            <input type="button" id="btn_rlogin_changepwd" style="border-color:darkred;border-width:2px;box-shadow:2px;margin:15px" value="CHANGE PASSWORD" class="form-control" />
+
+        </form>
+    </div>
+    <script>
+        function gotochangepwd() {
+            var x = document.getElementById("div_rlogin_changepwd");
+            var y = document.getElementById("div_rlogin_data");
+            var z = document.getElementById("div_rsearchblock");
+            if (x.style.display = "none") {
+                x.style.display = "inline-block";
+                y.style.display = "none";
+                z.style.display = "none";
+            }
+            else {
+
+            }
+        }
+
+        function gotorloginprofile() {
+            var x = document.getElementById("div_rlogin_changepwd");
+            var y = document.getElementById("div_rlogin_data");
+            var z = document.getElementById("div_rsearchblock");
+            if (y.style.display = "none") {
+                y.style.display = "block";
+                x.style.display = "none";
+                z.style.display = "none";
+            }
+        }
+
+        function rsearchdiv() {
+            var x = document.getElementById("div_rlogin_changepwd");
+            var y = document.getElementById("div_rlogin_data");
+            var z = document.getElementById("div_rsearchblock");
+            if (z.style.display = "none") {
+                z.style.display = "block";
+                x.style.display = "none";
+                y.style.display = "none";
+            }
+
+
+        }
+    </script>
+
+
+</body>
+
+</html>
+
+
+

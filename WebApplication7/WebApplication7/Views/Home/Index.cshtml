@@ -1,0 +1,446 @@
+﻿
+
+@model string
+<!DOCTYPE html>
+
+
+
+<html lang="en">
+<head>
+
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="~/styles/StyleSheetHome.css" rel="stylesheet" />
+
+    <script>
+        function myFunction() {
+            var x = document.getElementById("plzwork").value;
+            var y = document.getElementById("plzwork").value;
+            if(x!="")
+                alert(x);
+            Response.Cache.SetCacheability(HttpCacheability.NoCache);
+            Response.Cache.SetExpires(Now.AddSeconds(-1));
+            Response.Cache.SetNoStore();
+            Response.AppendHeader("Pragma", "no-cache");
+          
+        }
+    </script>
+</head>
+
+
+
+<body onload="myFunction()" id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60">
+   <input id="plzwork" style="visibility:hidden"  value="@Model">
+    
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#myPage">Blood For Life</a>
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#about">ABOUT</a></li>
+                    <li><a href="#services">SERVICES</a></li>
+                    <li><a href="#contact">CONTACT</a></li>
+                    <li id="btn_login_menue" onclick="openlogindiv()"><a href="#login">Log In</a></li>
+                    <li id="btn_signin_menue" onclick="opensignindiv()"><a href="#login">Sign In</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+   
+    <!--LOGIN/SIGNUP page-->
+    <div id="div_login_signin" class="mylogin" style="display:none;text-align:center">
+
+        <a onclick="closediv()"><i class="fa fa-close" style="font-size:36px;color:grey;margin-left:90%" onchange="closediv()"></i></a>
+        <div class="btn-group" data-toggle="buttons" style="background-color:#a80000;color:ghostwhite;padding:0% 2% 0% 2%;border-radius:50px;margin:0% 0% 1% 0%;font-size:150%">
+
+            <button id="btn_div_login" value="0" onclick="openlogindiv()" style="background-color:#a80000;border-radius:50px;border:0px;color:ghostwhite;margin:2px;">LOG IN</button>
+            <button id="btn_div_signin" value="0" onclick="opensignindiv()" style="background-color:#a80000;border-radius:50px;border:0px;color:ghostwhite;margin:2px;">SIGN IN</button>
+        </div>
+        <br>
+        <div class="btn-group" data-toggle="buttons" style="background-color:#a80000;color:ghostwhite;padding:0px 5px 0px 5px;border-radius:15px;margin:10px;font-size:120%">
+            <button id="btn_div_donor" value="0" onclick="divdonor()" style="background-color:#a80000;border-radius:10px;border:0px;color:ghostwhite;margin:2px;">Donor</button>
+            <button id="btn_div_reciever" value="0" onclick="divreciever()" style="background-color:#a80000;border-radius:10px;border:0px;color:ghostwhite;margin:2px;">Reciever</button>
+            <button id="btn_div_bloodbank" value="0" onclick="divbloodbank()" style="background-color:#a80000;border-radius:10px;border:0px;color:ghostwhite;margin:2px;">BloodBank</button>
+        </div>
+        <!--login div same for all-->
+        <div id="div_login" style="display:none">
+            <form style="margin:2%;display:inline-block" method="post" action="../../Donor/authenticateDonLogin" >
+                <input name="cnic" type="text" class="form-control" placeholder="CNIC/USERNAME" pattern="^([1-7][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9])$" title="Insert valid CNIC Number" style="margin-top:10%" required />
+                <input name="password"type="password" class="form-control" placeholder="PASSWORD" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,16}" title="Invalid Password" style="margin-top:10%" required />
+                <input type="checkbox" style="margin-top:10%" />  <label style="padding-bottom:4px">Remember Me</label>
+                <input type="submit" class="form-control" value="LOG IN" style="margin-top:10%;border-radius:5px;border-color:#a80000" />
+                <a style="margin-top:5%">Forgot Password</a>
+            </form>
+        </div>
+
+        <div id="div_login_receiver" style="display:none">
+            <form style="margin:2%;display:inline-block" method="post" action="../../Receiver/authenticateRecLogin">
+                <input name="cnic" type="text" class="form-control" placeholder="CNIC/USERNAME" pattern="^([1-7][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9])$" title="Insert valid CNIC Number" style="margin-top:10%" required />
+                <input name="password" type="password" class="form-control" placeholder="PASSWORD" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,16}" title="Invalid Password" style="margin-top:10%" required />
+                <input type="checkbox" style="margin-top:10%" />  <label style="padding-bottom:4px">Remember Me</label>
+                <input type="submit" class="form-control" value="LOG IN" style="margin-top:10%;border-radius:5px;border-color:#a80000" />
+                <a style="margin-top:5%">Forgot Password</a>
+            </form>
+        </div>
+
+        <div id="div_login_bloodbank" style="display:none">
+            <form style="margin:2%;display:inline-block"  >
+                <input type="text" class="form-control" placeholder="CNIC/USERNAME" style="margin-top:10%" required />
+                <input type="password" class="form-control" placeholder="PASSWORD" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,16}" title="Invalid Password" style="margin-top:10%" required />
+                <input type="checkbox" style="margin-top:10%" />  <label style="padding-bottom:4px">Remember Me</label>
+                <input type="submit" class="form-control" value="LOG IN" style="margin-top:10%;border-radius:5px;border-color:#a80000" />
+                <a style="margin-top:5%">Forgot Password</a>
+            </form>
+        </div>
+        <!--sign in for donor-->
+        <div id="div_signin_donor" style="display:none"  >
+            <form style="text-align:center;display:inline-block" method="post" action="../../Home/authenticatesignup">
+                <input type="text" class="form-control" style="margin:0.5%;margin-top:3%;width:40%;display:inline-block" name="name" placeholder="Name" required />
+                <input typ="text" class="form-control" style="margin:0.5%;margin-top:3%;width:40%;display:inline-block" name="cnic" placeholder="CNIC" pattern="^([1-7][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9])$" title="Insert valid CNIC Number" required />
+                <input type="tel" class="form-control" style="margin:0.5%;margin-top:3%;width:40%;display:inline-block" name="phoneno" placeholder="Phone No" pattern="^([0-0][3-3][0-5][0-5][0-9][0-9][0-9][0-9][0-9][0-9][0-9])$" title="Insert valid Phone No 11 digits" required />
+                <input type="text" class="form-control" style="margin:0.5%;margin-top:3%;width:40%;display:inline-block" pattern="^([2-9][0-9]|18|19)$" name="age" title="Age should be between 18 and 99" placeholder="Age" required />
+                <input list="signin_bloodtypes" class="form-control" style="margin:0.5%;margin-top:3%;width:40%;display:inline-block" pattern="^(A\+|A-|B\+|B-|AB\+|AB-|O\+|O-)$" name="bloodtype" title="Please select valid Blood Type (A+, A-, B+, B-, AB+, AB-, O+, O-)" placeholder="Blood Type" required />
+                <datalist id="signin_bloodtypes">
+                    <option value="A+">
+                    <option value="A-">
+                    <option value="B+">
+                    <option value="B-">
+                    <option value="AB+">
+                    <option value="AB-">
+                    <option value="O+">
+                    <option value="O-">
+                </datalist>
+                <input class="form-control" style="margin:0.5%;margin-top:3%;width:40%;display:inline-block" name="add" placeholder="Address" />
+                <input name="block" list="signin_block" class="form-control" style="margin:0.5%;margin-top:3%;width:40%;display:inline-block" placeholder="Block" value="None" />
+                <datalist  id="signin_block">
+                    <option>None</option>
+                    <option>Faisal Town</option>
+                </datalist>
+                <input name="city" class="form-control" type="text" style="margin:0.5%;margin-top:3%;width:40%;display:inline-block" placeholder="City" value="Lahore" />
+                <input name="password" class="form-control" type="password" id="pwd_d" style="margin:0.5%;margin-top:3%;width:40%;display:inline-block" onkeyup="donorcheck();" placeholder="Password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,16}" title="Must contain at least one number one uppercase and lower case letter and should contain 8 to 16 letters" required />
+                <input name="newpass" class="form-control" type="password" id="cpwd_d" style="margin:0.5%;margin-top:3%;width:40%;display:inline-block" onkeyup="donorcheck();" placeholder="Re-enter Password" required />
+                <span id="m_donor" style="display:inline-block;width:100%"></span>
+                <input type="submit" id="s_d" class="form-control" value="SIGN IN" style="margin-left:25%;margin-top:5%;border-radius:5px;border-color:#a80000" />
+            </form>
+        </div>
+        <!--Sign in For Reciever-->
+        <div id="div_signin_reciever" style="display:none" >
+            <form style="display:inline-block" method="post" action="../../Home/ReceiverSignup"  >
+                <input name="cnic" type="text" class="form-control" placeholder="CNIC" pattern="^([1-7][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9])$" title="Insert valid CNIC Number" style="margin-top:5%" required />
+                <input name="name"type="text" class="form-control" placeholder="NAME" style="margin-top:5%" required />
+                <input name="pno"type="text" class="form-control" placeholder="Phone No" pattern="^([0-0][3-3][0-5][0-5][0-9][0-9][0-9][0-9][0-9][0-9][0-9])$" title="Insert valid Phone No 11 digits" style="margin-top:5%" required />
+                <input name="address"type="text" class="form-control" placeholder="Address" style="margin-top:5%" />
+                <input name="password" type="password" id="pwd_r" class="form-control" onkeyup="recievercheck()" placeholder="Password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,16}" title="Must contain at least one number one uppercase and lower case letter and should contain 8 to 16 letters" style="margin-top:5%" required />
+                <input name="newpass" type="password" id="cpwd_r" class="form-control" onkeyup="recievercheck()" placeholder="Re-enter Password" style="margin-top:5%" required />
+                <span id="m_reciever"></span>
+                <input type="submit" id="s_r" class="form-control" value="SIGN IN" style="margin-top:10%;border-radius:5px;border-color:#a80000" />
+            </form>
+
+            
+
+
+
+            
+        </div>
+
+        <!--SignIn for BLOOD BANK-->
+        <div id="div_signin_bloodbank" style="display:none">
+            <form style="display:inline-block">
+                <input type="text" class="form-control" placeholder="Name" style="margin-top:5%" required />
+                <input type="text" class="form-control" placeholder="Hospital Name" style="margin-top:5%" required />
+                <input type="text" class="form-control" placeholder="Phone No" pattern="[0-9]{11}" title="Insert valid Phone No 11 digits" style="margin-top:5%" required />
+                <input type="password" id="pwd_b" class="form-control" onkeyup="bloodbankcheck();" placeholder="Password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,16}" title="Must contain at least one number one uppercase and lower case letter and should contain 8 to 16 letters" style="margin-top:5%" required />
+                <input type="password" id="cpwd_b" class="form-control" onkeyup="bloodbankcheck();" placeholder="Re-enter Password" style="margin-top:5%" required />
+                <span id="m_bloodbank"></span>
+                <input type="submit" id="s_b" class="form-control" value="SIGN IN" style="margin-top:10%;border-radius:5px;border-color:#a80000" />
+            </form>
+        </div>
+    </div>
+
+
+    <!--Search Bar Area for Reciever-->
+    <div class="jumbotron text-center">
+        <h1>SEARCH ENGINE</h1>
+        <form>
+            <div class="input-group" style="display:inline-block">
+                <input type="text" class="form-control" size="50" placeholder="CNIC" required>
+
+                <input type="password" class="form-control" size="50" placeholder="Password" required>
+            </div>
+            <p>Don't have account? <i onclick="opensdiv()" style="color:blue;font-style:normal">Sign IN</i></p>
+        </form>
+
+
+        <form>
+            <div class="input-group" style="display:inline-block">
+                <input list="bloodtypes" class="form-control" size="50" placeholder="Blood Type" style="margin:0.3%" required>
+                <datalist id="bloodtypes">
+                    <option value="A+">
+                    <option value="A-">
+                    <option value="B+">
+                    <option value="A-">
+                    <option value="AB+">
+                    <option value="AB-">
+                    <option value="O+">
+                    <option value="O-">
+                </datalist>
+                <input type="text" class="form-control" size="50" placeholder="City" value="Lahore" style="margin:0.3%" required>
+                <input type="text" class="form-control" size="50" placeholder="Block" style="margin:0.3%" required>
+                <div class="input-group-btn">
+                    <button type="button" class="btn btn-danger">SEARCH</button>
+                </div>
+            </div>
+        </form>
+
+    </div>
+
+
+    <!--Area for Donor Registration-->
+    <div class="jumbotron1 text-center">
+        <h3>BE A HERO!!! DONATE BLOOD SAVE LIVES.....</h3>
+        <form>
+            <div class="input-group" style="display:inline-block">
+                <input type="text" class="form-control" size="50" placeholder="CNIC" style="margin:0.3%;width:24%" required>
+                <input type="text" class="form-control" size="50" placeholder="NAME" style="margin:0.3%;width:24%" required>
+                <input type="text" class="form-control" size="50" placeholder="PHONE NUMBER" style="margin:0.3%;width:24%" required>
+                <input list="bloodtypes" class="form-control" size="50" placeholder="Blood Type" style="margin:0.3%;width:24%" required>
+                <datalist id="bloodtypes">
+                    <option value="A+">
+                    <option value="A-">
+                    <option value="B+">
+                    <option value="A-">
+                    <option value="AB+">
+                    <option value="AB-">
+                    <option value="O+">
+                    <option value="O-">
+                </datalist>
+            </div>
+        </form>
+
+
+        <form>
+            <div class="input-group" style="display:inline-block">
+
+                <input type="text" class="form-control" size="50" placeholder="City" value="Lahore" style="margin:0.3%;width:24%" required>
+                <input type="text" class="form-control" size="50" placeholder="Block" style="margin:0.3%;width:24%" required>
+                <input type="text" class="form-control" size="50" placeholder="Address" style="margin:0.3%;width:24%" required>
+
+                <button type="button" class="btn btn-danger" style="padding-left:30%;padding-right:30%">DONATE!!!</button>
+            </div>
+
+        </form>
+
+    </div>
+
+    <!-- Container (About Section) -->
+    <div id="about" class="container-fluid">
+        <div class="row">
+            <div class="col-sm-8">
+                <h2>About Company Page</h2><br>
+                <h4>Driven by our mission, we are dedicated to connecting people who need life-saving blood with generous volunteers who donate blood.</h4><br>
+                <p> We tend to enhance the well being of patients in our service area by assuring a reliable and economical supply of the safest possible blood.</p>
+                <br><button class="btn btn-default btn-lg">Get in Touch</button>
+            </div>
+            <div class="col-sm-4">
+                <span class="glyphicon glyphicon-signal logo"></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid bg-grey">
+        <div class="row">
+            <div class="col-sm-4">
+                <span class="glyphicon glyphicon-globe logo slideanim"></span>
+            </div>
+            <div class="col-sm-8">
+                <h2>Our Values</h2><br>
+                <h4><strong>MISSION:</strong>Our mission is to pursue superior performance because someone’s life depends on it.</h4><br>
+                <p>
+                    <strong>VISION:</strong> To be the best blood center in Pakistan. Dedicated to quality, integrity, service, and excellence in everything we do, (our websites name) works to ensure reliable and streamlined access to an adequate supply of thoroughly tested and safe blood and related products wherever they are needed.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Container (Services Section) -->
+    <div id="services" class="container-fluid text-center">
+        <h2>SERVICES</h2>
+        <h4>What we offer</h4>
+        <br>
+        <div class="row slideanim">
+            <div class="col-sm-4">
+                <span class="glyphicon glyphicon-off logo-small"></span>
+                <h4>POWER</h4>
+                <p>Lorem ipsum dolor sit amet..</p>
+            </div>
+            <div class="col-sm-4">
+                <span class="glyphicon glyphicon-heart logo-small"></span>
+                <h4>LOVE</h4>
+                <p>Lorem ipsum dolor sit amet..</p>
+            </div>
+            <div class="col-sm-4">
+                <span class="glyphicon glyphicon-lock logo-small"></span>
+                <h4>JOB DONE</h4>
+                <p>Lorem ipsum dolor sit amet..</p>
+            </div>
+        </div>
+        <br><br>
+        <div class="row slideanim">
+            <div class="col-sm-4">
+                <span class="glyphicon glyphicon-leaf logo-small"></span>
+                <h4>GREEN</h4>
+                <p>Lorem ipsum dolor sit amet..</p>
+            </div>
+            <div class="col-sm-4">
+                <span class="glyphicon glyphicon-certificate logo-small"></span>
+                <h4>CERTIFIED</h4>
+                <p>Lorem ipsum dolor sit amet..</p>
+            </div>
+            <div class="col-sm-4">
+                <span class="glyphicon glyphicon-wrench logo-small"></span>
+                <h4 style="color:#303030;">HARD WORK</h4>
+                <p>Lorem ipsum dolor sit amet..</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Container (reviews Section) -->
+    <div id="reviews" class="container-fluid text-center bg-grey">
+        <h2>What our USERS say</h2>
+        <div id="myCarousel" class="carousel slide text-center" data-ride="carousel">
+            <!-- Indicators -->
+            <ol class="carousel-indicators">
+                <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                <li data-target="#myCarousel" data-slide-to="1"></li>
+                <li data-target="#myCarousel" data-slide-to="2"></li>
+            </ol>
+
+            <!-- Wrapper for slides -->
+            <div class="carousel-inner" role="listbox">
+                <div class="item active">
+                    <h4>"This company is the best. I am so happy with the result!"<br><span>Michael Roe, Vice President, Comment Box</span></h4>
+                </div>
+                <div class="item">
+                    <h4>"One word... WOW!!"<br><span>John Doe, Salesman, Rep Inc</span></h4>
+                </div>
+                <div class="item">
+                    <h4>"Could I... BE any more happy with this company?"<br><span>Chandler Bing, Actor, FriendsAlot</span></h4>
+                </div>
+            </div>
+
+            <!-- Left and right controls -->
+            <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+                <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+                <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+    </div>
+
+    <!-- Container (Contact Section) -->
+    <div id="contact" class="container-fluid bg-grey">
+        <h2 class="text-center">CONTACT</h2>
+        <div class="row">
+            <div class="col-sm-5">
+                <p>Contact us and we'll get back to you within 24 hours.</p>
+                <p><span class="glyphicon glyphicon-map-marker"></span>FAST NUCES</p>
+                <p><span class="glyphicon glyphicon-phone"></span>Hameez Rizwan ---  +92 3444225504</p>
+                <p><span class="glyphicon glyphicon-envelope"></span>support@bloodforlife.com</p>
+            </div>
+            <div class="col-sm-7 slideanim">
+                <div class="row">
+                    <div class="col-sm-6 form-group">
+                        <input class="form-control" id="name" name="name" placeholder="Name" type="text" required>
+                    </div>
+                    <div class="col-sm-6 form-group">
+                        <input class="form-control" id="email" name="email" placeholder="Email" type="email" required>
+                    </div>
+                </div>
+                <textarea class="form-control" id="comments" name="comments" placeholder="Comment" rows="5"></textarea><br>
+                <div class="row">
+                    <div class="col-sm-12 form-group">
+                        <button class="btn btn-default pull-right" type="submit">Send</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="container-fluid text-center">
+        <a href="#myPage" title="To Top">
+            <span class="glyphicon glyphicon-chevron-up"></span>
+        </a>
+        <p>Made By Technical Support  <a>BLOOD FOR LIFE</a></p>
+    </footer>
+
+    <script>
+        $(document).ready(function () {
+            // Add smooth scrolling to all links in navbar + footer link
+            $(".navbar a, footer a[href='#myPage']").on('click', function (event) {
+                // Make sure this.hash has a value before overriding default behavior
+                if (this.hash !== "") {
+                    // Prevent default anchor click behavior
+                    event.preventDefault();
+
+                    // Store hash
+                    var hash = this.hash;
+
+                    // Using jQuery's animate() method to add smooth page scroll
+                    // The optional number (900) specifies the number of milliseconds it takes to scroll to the specified area
+                    $('html, body').animate({
+                        scrollTop: $(hash).offset().top
+                    }, 900, function () {
+
+                        // Add hash (#) to URL when done scrolling (default click behavior)
+                        window.location.hash = hash;
+                    });
+                } // End if
+            });
+
+            $(window).scroll(function () {
+                $(".slideanim").each(function () {
+                    var pos = $(this).offset().top;
+
+                    var winTop = $(window).scrollTop();
+                    if (pos < winTop + 600) {
+                        $(this).addClass("slide");
+                    }
+                });
+            });
+        })
+        $(document).ready(function () {
+            $('.photo-details-messages').click(function () {
+                var hidden = $('.message-window');
+                if (hidden.hasClass('visible')) {
+                    hidden.animate({ "left": "100%" }, "slow").removeClass('visible');
+                } else {
+                    hidden.animate({ "left": "50%" }, "slow").addClass('visible');
+                }
+            });
+        });
+
+
+
+
+
+    </script>
+    <script type="text/javascript" src="~/Scripts/JavaScript.js"></script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+﻿
+@{
+    Layout = null;
+}
+@model  string
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Login</title>
+</head>
+<body>
+    <div>
+        <form method="post" action="../Home/authenticatesignup">
+            <input placeholder="cnic" id="cnic" name="cnic" />
+            <br />
+            
+            <input placeholder="name" id="name" name="name" />
+            <br />
+            <input type="password" placeholder="password" id="name" name="password" />
+            <br />
+            <input placeholder="age" id="age" name="age" />
+            <br />
+            <input placeholder="phoneno" id="phoneno" name="phoneno" />
+            <br />
+            <input placeholder="block" id="block" name="block" />
+            <br />
+            <input placeholder="city" id="city" name="city" />
+            <br />
+            <input placeholder="address" id="add" name="add" />
+            <br />
+            <input placeholder="bloodtype" id="bloodtype" name="bloodtype" />
+            <br />
+            Password will be same as ur cnic
+            <input type="submit" value="Log in" />  &nbsp;&nbsp;&nbsp; <label>@Model</label>
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,325 @@
+﻿
+@using db_connectivity.Models;
+
+@model  List<List<List<String>>>
+
+<html lang="en">
+<head>
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <title>Bootstrap Theme Company Page</title>
+   
+   
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+    <style>
+        body {
+            font: 400 15px Lato, sans-serif;
+            line-height: 1.8;
+            color: #818181;
+        }
+
+        h2 {
+            font-size: 24px;
+            text-transform: uppercase;
+            color: #303030;
+            font-weight: 600;
+            margin-bottom: 30px;
+        }
+
+        h4 {
+            font-size: 19px;
+            line-height: 1.375em;
+            color: #303030;
+            font-weight: 400;
+            margin-bottom: 30px;
+        }
+
+        .jumbotron {
+            background-color: #a80000;
+            color: #fff;
+            padding: 50px 25px;
+            margin-top: 0.5%;
+            font-family: Montserrat, sans-serif;
+        }
+
+        .jumbotron1 {
+            background-color: #a80000;
+            color: #fff;
+            padding: 30px 25px;
+            margin-top: 0.5%;
+            border-radius: 50px;
+            text-align: center;
+            font-family: Montserrat, sans-serif;
+        }
+
+        .container-fluid {
+            padding: 60px 50px;
+        }
+
+        .bg-grey {
+            background-color: #f6f6f6;
+        }
+
+        .logo-small {
+            color: #a80000;
+            font-size: 50px;
+        }
+
+        .logo {
+            color: #a80000;
+            font-size: 200px;
+        }
+
+        .thumbnail {
+            padding: 0 0 15px 0;
+            border: none;
+            border-radius: 0;
+        }
+
+            .thumbnail img {
+                width: 100%;
+                height: 100%;
+                margin-bottom: 10px;
+            }
+
+        .carousel-control.right, .carousel-control.left {
+            background-image: none;
+            color: #a80000;
+        }
+
+        .carousel-indicators li {
+            border-color: #a80000;
+        }
+
+            .carousel-indicators li.active {
+                background-color: #a80000;
+            }
+
+        .item h4 {
+            font-size: 19px;
+            line-height: 1.375em;
+            font-weight: 400;
+            font-style: italic;
+            margin: 70px 0;
+        }
+
+        .item span {
+            font-style: normal;
+        }
+
+        .panel {
+            border: 1px solid #a80000;
+            border-radius: 0 !important;
+            transition: box-shadow 0.5s;
+        }
+
+            .panel:hover {
+                box-shadow: 5px 0px 40px rgba(0,0,0, .2);
+            }
+
+        .panel-footer .btn:hover {
+            border: 1px solid #a80000;
+            background-color: #fff !important;
+            color: #a80000;
+        }
+
+        .panel-heading {
+            color: #fff !important;
+            background-color: #a80000 !important;
+            padding: 25px;
+            border-bottom: 1px solid transparent;
+            border-top-left-radius: 0px;
+            border-top-right-radius: 0px;
+            border-bottom-left-radius: 0px;
+            border-bottom-right-radius: 0px;
+        }
+
+        .panel-footer {
+            background-color: white !important;
+        }
+
+            .panel-footer h3 {
+                font-size: 32px;
+            }
+
+            .panel-footer h4 {
+                color: #aaa;
+                font-size: 14px;
+            }
+
+            .panel-footer .btn {
+                margin: 15px 0;
+                background-color: #a80000;
+                color: #fff;
+            }
+
+        .navbar {
+            margin-bottom: 0;
+            background-color: #a80000;
+            z-index: 9999;
+            border: 0;
+            font-size: 12px !important;
+            line-height: 1.42857143 !important;
+            letter-spacing: 4px;
+            border-radius: 0;
+            font-family: Montserrat, sans-serif;
+        }
+
+            .navbar li a, .navbar .navbar-brand {
+                color: #fff !important;
+            }
+
+        .navbar-nav li a:hover, .navbar-nav li.active a {
+            color: #a80000 !important;
+            background-color: #fff !important;
+        }
+
+        .navbar-default .navbar-toggle {
+            border-color: transparent;
+            color: #fff !important;
+        }
+
+        footer .glyphicon {
+            font-size: 20px;
+            margin-bottom: 20px;
+            color: #a80000;
+        }
+
+        .slideanim {
+            visibility: hidden;
+        }
+
+        .slide {
+            animation-name: slide;
+            -webkit-animation-name: slide;
+            animation-duration: 1s;
+            -webkit-animation-duration: 1s;
+            visibility: visible;
+        }
+    </style>
+
+
+
+</head>
+
+<body>
+    <br />
+    <form method="get" action="../../Home/ReceiverView" name="myForm">
+     
+
+        <div class="input-group" style="display:inline-block">
+            <input type="hidden" name="cnic" value="@ViewBag.viewcnic" />
+            <input type="hidden" name="password" value="@ViewBag.viewpass" />
+            <input list="bloodtypes" name="btype" class="form-control" size="50" placeholder="Blood Type" style="margin:0.3%" required>
+            <datalist id="bloodtypes">
+                <option value="A+">
+                <option value="A-">
+                <option value="B+">
+                <option value="A-">
+                <option value="AB+">
+                <option value="AB-">
+                <option value="O+">
+                <option value="O-">
+            </datalist>
+            <input type="text" name="city" value="" class="form-control" size="50" placeholder="City" style="margin:0.3%" required>
+            <input type="text" name="block" value="" class="form-control" size="50" placeholder="Block" style="margin:0.3%" required>
+            <div class="input-group-btn">
+                <button type="submit" class="btn btn-danger">SEARCH</button>
+            </div>
+        </div>
+    </form>
+    <h2>Blood Banks</h2>
+    <div class="container" style="overflow-y: auto;  min-height: 100px; max-height:400px">
+       
+       
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Hospital Name</th>
+                    <th>Address</th>
+                    <th>City</th>
+                    <th>Block</th>
+                    <th>Qty</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (List<String> v in @Model[0])
+                {
+                    <tr>
+                        @for(int i=0;i<v.Count;i++) {
+
+                     <td>@v[i]</td>
+
+                 }
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <h2>Donors</h2>
+
+    <div class="container" style="overflow-y: auto; height:400px;">
+
+
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Phone No</th>
+                    <th>Blood type</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (List<String> v in @Model[1])
+                {
+                    <tr>
+                        @for (int i = 0; i < v.Count; i++)
+                        {
+
+                            <td>@v[i]</td>
+
+                        }
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+   
+    <script>
+        function checkcniclen(cnic, password) {
+
+            if (cnic.value.length != 13 || isNaN(cnic.value)) {
+                alert("cnic not valid");
+
+                cnic.value = "";
+                return false;
+            }
+            if (password.value.length < 7 && password.value.length > 16) {
+                alert("Password not valid");
+                password.value = "";
+                return false
+            }
+            return true;
+        }
+        function checkpasslen(password) {
+            var y = password;
+        }
+        
+
+
+    </script>
+
+</body>
+</html>

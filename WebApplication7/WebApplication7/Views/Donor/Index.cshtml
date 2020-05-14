@@ -1,0 +1,139 @@
+﻿<!--DONOR INDEX-->
+@using db_connectivity.Models;
+
+@model  List<String>
+
+<!DOCTYPE HTML>
+<html>
+<head>
+   
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+    <link href="~/styles/StyleSheetHome.css" rel="stylesheet" />
+
+
+</head>
+
+
+<body id="myPage" data-spy="scroll" style="text-align:center" data-target=".navbar" data-offset="60">
+
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#myPage">Blood For Life</a>
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#about"></a></li>
+                    <li><a href="#services"></a></li>
+                    <li onclick="gotodloginprofile()"><a href="#dprofile">MY PROFILE</a></li>
+                    <li onclick="gotochangepwd()"><a href="#dchangepwd">Change Password</a></li>
+                    <li><a href="../../Donor/DonLogout">LOG OUT</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+
+    <div>
+        <div class="text-center">
+            <form style="display:inline">
+                <h4 style="display:inline">Welcome </h4>
+                <h3 id="donornameheadline" style="display:inline">@Model[1]</h3>
+            </form>
+        </div>
+
+        <div class="text-left" id="div_dlogin_data">
+            <form>
+                CNIC: <input id="dlogin_cnic" class="form-control" placeholder="@Model[0]" style="margin:5px" readonly />
+
+                NAME: <input id="dlogin_name" class="form-control" placeholder="@Model[1]" style="margin:5px" />
+
+                PHONE NO: <input id="dlogin_phoneno" class="form-control" placeholder="@Model[2]" style="margin:5px" />
+
+                ADDRESS: <input id="dlogin_address" class="form-control" placeholder="@Model[3]" style="margin:5px" />
+
+                BLOCK: <input list="dlogin_block" class="form-control" placeholder="@Model[4]" style="margin:5px" />
+                <datalist id="dlogin_block">
+                    <option value="Faisal Town" />
+                </datalist>
+
+                CITY: <input list="dlogin_city" class="form-control" placeholder="@Model[5]" style="margin:5px" />
+                <datalist id="dlogin_city">
+                    <option value="Lahore" />
+                </datalist>
+
+                AGE: <input id="dlogin_age" type="number" class="form-control" placeholder="@Model[6]" style="margin:5px" />
+
+                STATUS: <input list="dlogin_status" class="form-control" placeholder="ACTIVE/IN-ACTIVE" style="margin:5px" />
+                <datalist id="dlogin_status">
+                    <option value="Active"></option>
+                    <option value="In Active"></option>
+                </datalist>
+
+                BLOOD TYPE: <input list="dlogin_bloodtype" class="form-control" placeholder="@Model[8]" style="margin:5px" />
+                <datalist id="dlogin_bloodtype">
+                    <option value="A+">
+                    <option value="A-">
+                    <option value="B+">
+                    <option value="A-">
+                    <option value="AB+">
+                    <option value="AB-">
+                    <option value="O+">
+                    <option value="O-">
+                </datalist>
+                <br />
+                <input type="button" id="dlogin_update" style="border-color:darkred;border-width:2px;box-shadow:2px" value="UPDATE" class="form-control" />
+
+            </form>
+        </div>
+    </div>
+
+    <div id="div_dlogin_changepwd" style="display:none">
+        <form>
+            <input id="dlogin_oldpwd" class="form-control" type="password" placeholder="OLD PASSWORD" style="margin:15px" required />
+            <input id="dlogin_newpwd" class="form-control" type="password" placeholder="NEW PASSWORD" style="margin:15px" required />
+            <input id="dlogin_newpwdconfirm" class="form-control" type="password" placeholder="RE-ENTER NEW PASSWORD" style="margin:15px" required />
+            <input type="button" id="btn_dlogin_changepwd" style="border-color:darkred;border-width:2px;box-shadow:2px;margin:15px" value="CHANGE PASSWORD" class="form-control" />
+
+        </form>
+    </div>
+    <script>
+     function gotochangepwd() {
+         var x = document.getElementById("div_dlogin_changepwd");
+         var y = document.getElementById("div_dlogin_data");
+         if (x.style.display = "none") {
+             x.style.display = "inline-block";
+             y.style.display = "none";
+         }
+         else {
+
+         }
+     }
+
+     function gotodloginprofile() {
+         var x = document.getElementById("div_dlogin_changepwd");
+         var y = document.getElementById("div_dlogin_data");
+         if (y.style.display = "none") {
+             y.style.display = "block";
+             x.style.display = "none";
+         }
+     }
+    </script>
+
+
+</body>
+
+</html>
+
